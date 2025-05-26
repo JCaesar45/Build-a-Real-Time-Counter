@@ -1,0 +1,93 @@
+** start of index.html **
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Real Time Character Counter</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Real Time Character Counter</h1>
+    <textarea id="text-input" placeholder="Type here..."></textarea>
+    <p id="char-count">Character Count: 0/50</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+** end of index.html **
+
+** start of styles.css **
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f9fc;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 350px;
+  background: white;
+  padding: 20px 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+textarea#text-input {
+  width: 100%;
+  height: 120px;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: none;
+  box-sizing: border-box;
+}
+
+#char-count {
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+}
+
+#char-count.max {
+  color: #d62828; /* red when max chars reached */
+}
+
+
+** end of styles.css **
+
+** start of script.js **
+
+const textarea = document.getElementById('text-input');
+const charCount = document.getElementById('char-count');
+const maxChars = 50;
+
+textarea.addEventListener('input', () => {
+  let text = textarea.value;
+
+  if (text.length > maxChars) {
+    text = text.substring(0, maxChars);
+    textarea.value = text;
+  }
+
+  charCount.textContent = `Character Count: ${text.length}/${maxChars}`;
+
+  if (text.length === maxChars) {
+    charCount.style.color = 'red';  // exact inline style for test
+  } else {
+    charCount.style.color = '';  // reset to default color
+  }
+});
+
+
+** end of script.js **
+
